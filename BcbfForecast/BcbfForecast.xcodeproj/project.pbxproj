@@ -30,6 +30,7 @@
 		82717947245F5A93008A0FB8 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		8271794A245F7405008A0FB8 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		8271794C245F7417008A0FB8 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
+		8271794F245F7710008A0FB8 /* SummaryApi.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SummaryApi.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +63,7 @@
 		82717932245F543A008A0FB8 /* BcbfForecast */ = {
 			isa = PBXGroup;
 			children = (
+				8271794E245F76EF008A0FB8 /* API */,
 				82717949245F73E7008A0FB8 /* Cell */,
 				82717933245F543A008A0FB8 /* AppDelegate.swift */,
 				82717935245F543A008A0FB8 /* SceneDelegate.swift */,
@@ -82,6 +84,14 @@
 				8271794C245F7417008A0FB8 /* ForecastTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8271794E245F76EF008A0FB8 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8271794F245F7710008A0FB8 /* SummaryApi.playground */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -13,6 +13,7 @@
 		8271793B245F543A008A0FB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82717939245F543A008A0FB8 /* Main.storyboard */; };
 		8271793D245F543B008A0FB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8271793C245F543B008A0FB8 /* Assets.xcassets */; };
 		82717940245F543B008A0FB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8271793E245F543B008A0FB8 /* LaunchScreen.storyboard */; };
+		82717948245F5A93008A0FB8 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82717947245F5A93008A0FB8 /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8271793C245F543B008A0FB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8271793F245F543B008A0FB8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82717941245F543B008A0FB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82717947245F5A93008A0FB8 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				8271793C245F543B008A0FB8 /* Assets.xcassets */,
 				8271793E245F543B008A0FB8 /* LaunchScreen.storyboard */,
 				82717941245F543B008A0FB8 /* Info.plist */,
+				82717947245F5A93008A0FB8 /* Common.swift */,
 			);
 			path = BcbfForecast;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82717948245F5A93008A0FB8 /* Common.swift in Sources */,
 				82717938245F543A008A0FB8 /* ViewController.swift in Sources */,
 				82717934245F543A008A0FB8 /* AppDelegate.swift in Sources */,
 				82717936245F543A008A0FB8 /* SceneDelegate.swift in Sources */,
@@ -287,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HBXK2UB5Z3;
 				INFOPLIST_FILE = BcbfForecast/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HBXK2UB5Z3;
 				INFOPLIST_FILE = BcbfForecast/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

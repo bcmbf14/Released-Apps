@@ -1,7 +1,5 @@
 import UIKit
 
-var str = "Hello, playground"
-
 
 struct WeatherSummary: Codable {
     

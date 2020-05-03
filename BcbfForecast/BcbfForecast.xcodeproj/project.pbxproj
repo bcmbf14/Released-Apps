@@ -31,6 +31,7 @@
 		8271794A245F7405008A0FB8 /* SummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTableViewCell.swift; sourceTree = "<group>"; };
 		8271794C245F7417008A0FB8 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
 		8271794F245F7710008A0FB8 /* SummaryApi.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SummaryApi.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		82717950245F7ADB008A0FB8 /* ForecastApi.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ForecastApi.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				8271794F245F7710008A0FB8 /* SummaryApi.playground */,
+				82717950245F7ADB008A0FB8 /* ForecastApi.playground */,
 			);
 			path = API;
 			sourceTree = "<group>";

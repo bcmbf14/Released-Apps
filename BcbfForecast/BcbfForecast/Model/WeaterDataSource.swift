@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 
 class WeaterDataSource {
@@ -17,14 +18,39 @@ class WeaterDataSource {
     var summary: WeatherSummary?
     var forecastList = [ForecastData]()
     
-    func fetchSummary(lat: Double, lon:Double, completion: @escaping () -> ()){
-
+    
+    let group = DispatchGroup()
+    let workQueue = DispatchQueue(label: "apiQueue", attributes: .concurrent)
+    
+    func fetch(location: CLLocation, completion: @escaping () -> ()){
+        group.enter()
+        workQueue.async {
+            self.fetchSummary(lat: location.coordinate.latitude, lon: location.coordinate.longitude) {
+                self.group.leave()
+            }
+        }
+        
+        group.enter()
+        workQueue.async {
+            self.fetchForecast(lat: location.coordinate.latitude, lon: location.coordinate.longitude) {
+                self.group.leave()
+            }
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            completion()
+        }
+        
+    }
+    
+    private func fetchSummary(lat: Double, lon:Double, completion: @escaping () -> ()){
+        
         let apiUrl = "https://apis.openapi.sk.com/weather/current/minutely?version=2&lat=\(lat)&lon=\(lat)&appKey=\(appKey)"
-
+        
         let url = URL(string: apiUrl)!
-
+        
         let session = URLSession.shared
-
+        
         let task = session.dataTask(with: url) { (data, response, error) in
             
             defer {
@@ -63,21 +89,21 @@ class WeaterDataSource {
             }
             
         }
-
+        
         task.resume()
-
-
+        
+        
     }
     
-    func fetchForecast(lat: Double, lon:Double, completion: @escaping () -> ()){
+    private func fetchForecast(lat: Double, lon:Double, completion: @escaping () -> ()){
         forecastList.removeAll()
         
         let apiUrl = "https://apis.openapi.sk.com/weather/forecast/3days?version=2&lat=\(lat)&lon=\(lon)&appKey=\(appKey)"
-
+        
         let url = URL(string: apiUrl)!
-
+        
         let session = URLSession.shared
-
+        
         let task = session.dataTask(with: url) { (data, response, error) in
             
             defer{
@@ -117,8 +143,8 @@ class WeaterDataSource {
             }
             
         }
-
+        
         task.resume()
-
+        
     }
 }

@@ -44,14 +44,6 @@ class ViewController: UIViewController {
         listTableView.separatorStyle = .none
         listTableView.showsVerticalScrollIndicator = false
         
-        WeaterDataSource.shared.fetchSummary(lat: 37.498206, lon: 127.02761) { [weak self]  in
-            self?.listTableView.reloadData()
-        }
-        
-        WeaterDataSource.shared.fetchForecast(lat: 37.498206, lon: 127.02761) { [weak self]  in
-            self?.listTableView.reloadData()
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,14 +105,14 @@ extension ViewController: CLLocationManagerDelegate {
         if let loc = locations.first {
             print(loc.coordinate)
             
-//        Geocoding
-//        특정 주소나 명칭을 사용해서 좌표를 얻는 것
-//        Reverse Geocoding
-//        좌표를 주소로 바꾸는 것
+            //        Geocoding
+            //        특정 주소나 명칭을 사용해서 좌표를 얻는 것
+            //        Reverse Geocoding
+            //        좌표를 주소로 바꾸는 것
             
             let geocoder = CLGeocoder()
             geocoder.reverseGeocodeLocation(loc) { [weak self] (placemarks, error) in
-//                하나의 명칭에 대한 여러가지 명칭이 있을 수 있어서 배열로 전달해줌
+                //                하나의 명칭에 대한 여러가지 명칭이 있을 수 있어서 배열로 전달해줌
                 if let place = placemarks?.first {
                     
                     //미국 기준이기 때문에 우리나라 구랑 동을 받아와야 함
@@ -130,6 +122,13 @@ extension ViewController: CLLocationManagerDelegate {
                         self?.locationLabel.text = place.name
                     }
                 }
+            }
+            
+            
+            //        샘플에서는 뷰디드로드에서 호출했는데, 뷰디드로드에서 현재 로케이션 정보를 받아올 수 없으니
+            //        이델리게이트에서 호출한다.
+            WeaterDataSource.shared.fetch(location: loc) { [weak self] in
+                self?.listTableView.reloadData()
             }
             
         }
@@ -150,7 +149,7 @@ extension ViewController: CLLocationManagerDelegate {
             updateCurrentLocation()
         default:
             print("")
-//            fatalError()
+            //            fatalError()
         }
     }
     

@@ -19,6 +19,7 @@
 		82717953245F7DCE008A0FB8 /* WeatherSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82717952245F7DCE008A0FB8 /* WeatherSummary.swift */; };
 		82717955245F7E47008A0FB8 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82717954245F7E47008A0FB8 /* Forecast.swift */; };
 		82717957245F82F0008A0FB8 /* WeaterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82717956245F82F0008A0FB8 /* WeaterDataSource.swift */; };
+		8271795A2460CB87008A0FB8 /* UIVIewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827179592460CB87008A0FB8 /* UIVIewController+Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		82717952245F7DCE008A0FB8 /* WeatherSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSummary.swift; sourceTree = "<group>"; };
 		82717954245F7E47008A0FB8 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		82717956245F82F0008A0FB8 /* WeaterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaterDataSource.swift; sourceTree = "<group>"; };
+		827179592460CB87008A0FB8 /* UIVIewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+Alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		82717932245F543A008A0FB8 /* BcbfForecast */ = {
 			isa = PBXGroup;
 			children = (
+				827179582460CB71008A0FB8 /* Extension */,
 				82717951245F7DB2008A0FB8 /* Model */,
 				8271794E245F76EF008A0FB8 /* API */,
 				82717949245F73E7008A0FB8 /* Cell */,
@@ -111,6 +114,14 @@
 				82717956245F82F0008A0FB8 /* WeaterDataSource.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		827179582460CB71008A0FB8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				827179592460CB87008A0FB8 /* UIVIewController+Alert.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82717955245F7E47008A0FB8 /* Forecast.swift in Sources */,
+				8271795A2460CB87008A0FB8 /* UIVIewController+Alert.swift in Sources */,
 				8271794D245F7417008A0FB8 /* ForecastTableViewCell.swift in Sources */,
 				82717957245F82F0008A0FB8 /* WeaterDataSource.swift in Sources */,
 				82717948245F5A93008A0FB8 /* Common.swift in Sources */,

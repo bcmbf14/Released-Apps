@@ -7,8 +7,17 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
+    
+    
+    lazy var locationManager: CLLocationManager = {
+        let m = CLLocationManager()
+        m.delegate = self
+        return m
+    }()
+    
     
     let tempFormatter: NumberFormatter = {
         let f = NumberFormatter()
@@ -25,6 +34,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var listTableView: UITableView!
     
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +50,30 @@ class ViewController: UIViewController {
         
         WeaterDataSource.shared.fetchForecast(lat: 37.498206, lon: 127.02761) { [weak self]  in
             self?.listTableView.reloadData()
+        }
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        locationLabel.text = "업데이트 중..."
+        
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined:
+                locationManager.requestWhenInUseAuthorization()
+            case .authorizedAlways, .authorizedWhenInUse:
+                updateCurrentLocation()
+            case .denied, .restricted:
+                show(message: "위치 서비스 사용 불가")
+            default:
+                fatalError()
+            }
+            
+            
+        } else{
+            show(message: "위치 서비스 사용 불가")
         }
         
     }
@@ -60,6 +96,38 @@ class ViewController: UIViewController {
             }
         }
         
+    }
+    
+}
+
+extension ViewController: CLLocationManagerDelegate {
+    
+    func updateCurrentLocation(){
+        locationManager.startUpdatingLocation() //사용자의 위치가 업데이트 될때마다 델리게이트를 통해 알려줌
+    }
+    
+    
+    //위치정보가 업데이트 될떄마다 반복적으로 알려줌
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        //계속 알려주면 배터리가 소모되니까 한번만 받고 그만받기. 배터리절약. 위치기반 배터리 아주중요.
+        manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        show(message: error.localizedDescription)
+        manager.stopUpdatingLocation()
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            updateCurrentLocation()
+        default:
+            print("")
+//            fatalError()
+        }
     }
     
 }

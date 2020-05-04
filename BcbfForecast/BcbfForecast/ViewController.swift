@@ -28,6 +28,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        listTableView.backgroundColor = UIColor.clear
+        listTableView.separatorStyle = .none
+        listTableView.showsVerticalScrollIndicator = false
+        
         WeaterDataSource.shared.fetchSummary(lat: 37.498206, lon: 127.02761) { [weak self]  in
             self?.listTableView.reloadData()
         }
@@ -57,10 +61,6 @@ class ViewController: UIViewController {
         }
         
     }
-    
-    
-    
-    
     
 }
 

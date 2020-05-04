@@ -110,6 +110,30 @@ extension ViewController: CLLocationManagerDelegate {
     //위치정보가 업데이트 될떄마다 반복적으로 알려줌
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        if let loc = locations.first {
+            print(loc.coordinate)
+            
+//        Geocoding
+//        특정 주소나 명칭을 사용해서 좌표를 얻는 것
+//        Reverse Geocoding
+//        좌표를 주소로 바꾸는 것
+            
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(loc) { [weak self] (placemarks, error) in
+//                하나의 명칭에 대한 여러가지 명칭이 있을 수 있어서 배열로 전달해줌
+                if let place = placemarks?.first {
+                    
+                    //미국 기준이기 때문에 우리나라 구랑 동을 받아와야 함
+                    if let gu = place.locality, let dong = place.subLocality {
+                        self?.locationLabel.text = "\(gu) \(dong)"
+                    }else{
+                        self?.locationLabel.text = place.name
+                    }
+                }
+            }
+            
+        }
+        
         //계속 알려주면 배터리가 소모되니까 한번만 받고 그만받기. 배터리절약. 위치기반 배터리 아주중요.
         manager.stopUpdatingLocation()
     }

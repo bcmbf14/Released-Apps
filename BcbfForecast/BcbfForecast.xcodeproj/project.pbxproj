@@ -40,6 +40,9 @@
 		82717954245F7E47008A0FB8 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		82717956245F82F0008A0FB8 /* WeaterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaterDataSource.swift; sourceTree = "<group>"; };
 		827179592460CB87008A0FB8 /* UIVIewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+Alert.swift"; sourceTree = "<group>"; };
+		8271795C2460CEAC008A0FB8 /* 강남역.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "강남역.gpx"; sourceTree = "<group>"; };
+		8271795D2460CF42008A0FB8 /* 광안리 해수욕장.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "광안리 해수욕장.gpx"; sourceTree = "<group>"; };
+		8271795E2460CF50008A0FB8 /* 강릉항.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "강릉항.gpx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,7 @@
 		82717932245F543A008A0FB8 /* BcbfForecast */ = {
 			isa = PBXGroup;
 			children = (
+				8271795B2460CE99008A0FB8 /* Location */,
 				827179582460CB71008A0FB8 /* Extension */,
 				82717951245F7DB2008A0FB8 /* Model */,
 				8271794E245F76EF008A0FB8 /* API */,
@@ -122,6 +126,16 @@
 				827179592460CB87008A0FB8 /* UIVIewController+Alert.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		8271795B2460CE99008A0FB8 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				8271795C2460CEAC008A0FB8 /* 강남역.gpx */,
+				8271795E2460CF50008A0FB8 /* 강릉항.gpx */,
+				8271795D2460CF42008A0FB8 /* 광안리 해수욕장.gpx */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

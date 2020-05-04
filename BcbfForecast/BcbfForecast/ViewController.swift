@@ -35,7 +35,30 @@ class ViewController: UIViewController {
         WeaterDataSource.shared.fetchForecast(lat: 37.498206, lon: 127.02761) { [weak self]  in
             self?.listTableView.reloadData()
         }
+        
     }
+    
+    var topInset: CGFloat = 0.0
+    
+    //뷰 배치가 완료된 다음에 호출.
+    //라이프 사이클 동안 반복적으로 호출.
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if topInset == 0.0 {
+            let first = IndexPath(row: 0, section: 0)
+            if let cell = listTableView.cellForRow(at: first)  {
+                topInset = listTableView.frame.height - cell.frame.height
+                
+                var inset = listTableView.contentInset
+                inset.top = topInset
+                listTableView.contentInset = inset
+            }
+        }
+        
+    }
+    
+    
     
     
     

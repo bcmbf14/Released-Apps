@@ -15,7 +15,7 @@ class WeaterDataSource {
     private init() {}
     
     var summary: WeatherSummary?
-    var forecastList = [Any]()
+    var forecastList = [ForecastData]()
     
     func fetchSummary(lat: Double, lon:Double, completion: @escaping () -> ()){
 
@@ -69,7 +69,7 @@ class WeaterDataSource {
 
     }
     
-    func fetchRorecast(lat: Double, lon:Double, completion: @escaping () -> ()){
+    func fetchForecast(lat: Double, lon:Double, completion: @escaping () -> ()){
         forecastList.removeAll()
         
         let apiUrl = "https://apis.openapi.sk.com/weather/forecast/3days?version=2&lat=\(lat)&lon=\(lon)&appKey=\(appKey)"
@@ -110,7 +110,7 @@ class WeaterDataSource {
                 
                 let decoder = JSONDecoder()
                 let forecast = try decoder.decode(Forecast.self, from: data)
-                
+                self.forecastList.append(contentsOf: forecast.weather.arrayRepresentation())
                 
             }catch{
                 print(error)

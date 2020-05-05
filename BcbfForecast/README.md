@@ -165,6 +165,21 @@ struct WeatherSummary: Codable {
 
 <details markdown="1">
 <summary> URLSession API, Playgound Test </summary>
+
+- 몰랐는데, playground를 만들어서 API를 테스트 해볼 수가 있드라. 
+- 그냥 원하는 이름으로 ㅇㅇㅇApi처럼 playground를 하나 만들고 테스트 하면 돼. 
+- 라이브러리 안쓰고 URLSession을 사용했어. 
+- URLSession와 Alamofire의 차이가 무엇인지, 장단점을 찾아보도록 해. 
+- 여기서의 핵심은, 
+    - URLSession 사용해서 request, response 하는 부분 
+    - 에러나 기타 상태코드에 따른 예외처리 
+    - playground testing 
+    - DispatchGroup, DispatchQueue 생성 
+    - group.enter(), group.leave()
+    - defer와 completion: @escaping 사용해서 비동기로 받아온 데이터 리턴받기
+    - parameter하고 header넣어서 처리하기 
+
+
 </details>
 
 <details markdown="1">

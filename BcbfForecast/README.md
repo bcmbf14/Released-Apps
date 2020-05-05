@@ -7,13 +7,152 @@ ___배운점과 추가로 공부해야될 부분들 정리___
 
 ___SKT API 등록 및 연동___
 
+- API는 SK Open API를 사용했다. 해당 링크는 [여기](https://openapi.sk.com/content/API)로 가면 확인할 수 있다. 
+- 특별히 설명할 것은 없는데, 다른 좋은 API들이 많다. 활용해서 뭘 더 만들어보면 재밌을 것 같다. 어려울 것..도 같고 ?ㅎㅎ
+- 당장 흥미가 가는 것은 역시나 T map, 그리고 광범위하게 쓰일 수 있는 11번가 API. 이거 2개가 제일 흥미가 가긴 한다. 
+# 
+![image](https://user-images.githubusercontent.com/60660894/81121311-63fbb600-8f69-11ea-828f-36e54aeb4a12.png)
+
 # 
 
 ___UIVIewController+Alert___
 
+이건 뭐 간단하지만, 그만큼 많이 쓰이므로 하나 첨부
+```swift 
+
+extension UIViewController {
+    
+    func show(message:String) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(ok)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+```
+
 # 
 
 ___Codable Model&JSON___
+
+- JSON Pasing 같은 경우에 애초에 Codable 쓰다가 모델링이 제대로 안되면 자꾸 Crash나는 문제때문에 SwiftyJSON을 썼잖아?
+- 음, 이번에 Codable을 좀 배운 것 같고 
+  - Codable을 좀 더 깊이 파볼 것. 
+  - Codable과 Codable이 없던 이전(iOS8)에는 어떻게 했는지 알아볼 것. 
+  - ObjectMapper 라이브러리인가? 그거 한 번 사용해볼 것. 
+  - Codable과 SwiftyJSON ObjectMapper의 차이, 장단점 등을 파악해볼 것. 
+
+# 
+
+- 그래서 일단 결국은 Codable 부터인데, 요약하면 
+  - 전체 데이터 중에 내가 원하는 것만 빼올 수 있다. 
+  - 데이터 구조와 모델링을 똑같이 해야한다. 
+  - 데이터의 항목?아이템?이름과 구조체의 상수(let) 변수 이름은 동일해야 한다. 
+  
+- 정말 많이 쓰이므로 잘 숙지해 둘 것. 
+
+```swift 
+struct WeatherSummary: Codable {
+    
+    struct Weather: Codable {
+        struct Minutely: Codable{
+            struct Sky: Codable {
+                let code: String
+                let name: String
+            }
+            
+            struct Temperature:Codable {
+                let tc: String
+                let tmax: String
+                let tmin: String
+            }
+            
+            let sky: Sky
+            let temperature: Temperature
+            
+        }
+        
+        let minutely: [Minutely]
+    }
+    
+    struct Result: Codable {
+        let code: Int
+        let message: String
+        
+    }
+    
+    let weather: Weather
+    let result: Result
+}
+
+```
+
+```
+{
+    "weather": {
+        "minutely": [
+        {
+        "station": {
+        "longitude": "127.01562",
+        "latitude": "37.48891",
+        "name": "서초",
+        "id": "401",
+        "type": "KMA"
+        },
+        "wind": {
+        "wdir": "163.60",
+        "wspd": "1.50"
+        },
+        "precipitation": {
+        "sinceOntime": "0.00",
+        "type": "0"
+        },
+        "sky": {
+        "code": "SKY_A01",
+        "name": "맑음"
+        },
+        "rain": {
+        "sinceOntime": "0.00",
+        "sinceMidnight": "0.00",
+        "last10min": "0.00",
+        "last15min": "0.00",
+        "last30min": "0.00",
+        "last1hour": "0.00",
+        "last6hour": "0.00",
+        "last12hour": "0.00",
+        "last24hour": "0.00"
+        },
+        "temperature": {
+        "tc": "13.80",
+        "tmax": "28.00",
+        "tmin": "12.00"
+        },
+        "humidity": "",
+        "pressure": {
+        "surface": "",
+        "seaLevel": ""
+        },
+        "lightning": "0",
+        "timeObservation": "2020-05-06 07:19:00"
+        }
+        ]
+    },
+    "common": {
+        "alertYn": "Y",
+        "stormYn": "N"
+    },
+    "result": {
+        "code": 9200,
+        "requestUrl": "/weather/current/minutely?version=2&lat=37.498206&lon=127.02761&appKey=l7xx3db99b1125e3421e9ad660651d5563b1",
+        "message": "성공"
+    }
+}
+```
+
 
 # 
 

@@ -6,7 +6,7 @@ ___배운점과 추가로 공부해야될 부분들 정리___
 # 
 
 <details markdown="1">
-<summary>___SKT API 등록 및 연동___</summary>
+<summary> SKT API 등록 및 연동 </summary>
 
 - API는 SK Open API를 사용했다. 해당 링크는 [여기](https://openapi.sk.com/content/API)로 가면 확인할 수 있다. 
 - 특별히 설명할 것은 없는데, 다른 좋은 API들이 많다. 활용해서 뭘 더 만들어보면 재밌을 것 같다. 어려울 것..도 같고 ?ㅎㅎ
@@ -19,7 +19,8 @@ ___배운점과 추가로 공부해야될 부분들 정리___
 
 # 
 
-___UIVIewController+Alert___
+<details markdown="1">
+<summary> UIVIewController+Alert </summary>
 
 이건 뭐 간단하지만, 그만큼 많이 쓰이므로 하나 첨부
 ```swift 
@@ -36,12 +37,16 @@ extension UIViewController {
     }
     
 }
-
 ```
+
+</details>
 
 # 
 
-___Codable Model&JSON___
+
+
+<details markdown="1">
+<summary> Codable Model&JSON </summary>
 
 - JSON Pasing 같은 경우에 애초에 Codable 쓰다가 모델링이 제대로 안되면 자꾸 Crash나는 문제때문에 SwiftyJSON을 썼잖아?
 - 음, 이번에 Codable을 좀 배운 것 같고 
@@ -156,6 +161,7 @@ struct WeatherSummary: Codable {
     }
 }
 ```
+</details>
 
 
 # 

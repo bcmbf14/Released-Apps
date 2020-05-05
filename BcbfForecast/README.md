@@ -5,13 +5,17 @@ ___배운점과 추가로 공부해야될 부분들 정리___
 
 # 
 
-___SKT API 등록 및 연동___
+<details markdown="1">
+<summary>___SKT API 등록 및 연동___</summary>
 
 - API는 SK Open API를 사용했다. 해당 링크는 [여기](https://openapi.sk.com/content/API)로 가면 확인할 수 있다. 
 - 특별히 설명할 것은 없는데, 다른 좋은 API들이 많다. 활용해서 뭘 더 만들어보면 재밌을 것 같다. 어려울 것..도 같고 ?ㅎㅎ
 - 당장 흥미가 가는 것은 역시나 T map, 그리고 광범위하게 쓰일 수 있는 11번가 API. 이거 2개가 제일 흥미가 가긴 한다. 
 # 
 ![image](https://user-images.githubusercontent.com/60660894/81121311-63fbb600-8f69-11ea-828f-36e54aeb4a12.png)
+
+</details>
+
 
 # 
 

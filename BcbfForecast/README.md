@@ -159,42 +159,42 @@ struct WeatherSummary: Codable {
 ```
 </details>
 
+<details markdown="1">
+<summary> NSObject Key&Value Coding </summary>
+</details>
 
+<details markdown="1">
+<summary> URLSession API, Playgound Test </summary>
+</details>
 
-___NSObject Key&Value Coding___
+<details markdown="1">
+<summary> NumberFormatter, DateFormatter </summary>
+</details>
 
-# 
+<details markdown="1">
+<summary> CoreLocation, CLLocationManagerDelegate </summary>
+</details>
 
-___URLSession API, Playgound Test___
+<details markdown="1">
+<summary> Privacy 권한요청 및 실패시 대응 </summary>
+</details>
 
-# 
+<details markdown="1">
+<summary> viewDidLayoutSubviews </summary>
+</details>
 
-___NumberFormatter, DateFormatter___
+<details markdown="1">
+<summary> DataSource Singleton </summary>
+</details>
 
-# 
+<details markdown="1">
+<summary> String to Double Type, 소수점 자리수 지정 </summary>
+</details>
 
-___CoreLocation, CLLocationManagerDelegate___
+<details markdown="1">
+<summary> Geocoding, Reverse Geocoding </summary>
+</details>
 
-# 
-
-___Privacy 권한요청 및 실패시 대응___
-
-# 
-
-
-___viewDidLayoutSubviews___
-
-# 
-
-___DataSource Singleton___
-
-# 
-
-___String to Double Type, 소수점 자리수 지정___
-
-# 
-
-___Geocoding, Reverse Geocoding___
 
 # 
 

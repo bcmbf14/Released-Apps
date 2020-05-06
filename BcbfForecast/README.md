@@ -220,7 +220,7 @@ cell.timeLabel.text = dateFormatter.string(for: target.date)
 </details>
 
 
-#stack-program
+
 
 <details markdown="1">
 <summary> CoreLocation, CLLocationManagerDelegate </summary>
@@ -363,7 +363,7 @@ override func viewDidLayoutSubviews() {
 
 ````
 
-
+#stack-program
 
 
 </details>

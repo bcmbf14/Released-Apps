@@ -4,8 +4,6 @@
 ___배운점과 추가로 공부해야될 부분들 정리___
 
 
-[gogo ](#stack-program)
-
 
 <details markdown="1">
 <summary> SKT API 등록 및 연동 </summary>
@@ -363,8 +361,6 @@ override func viewDidLayoutSubviews() {
 
 ````
 
-#stack-program
-
 
 </details>
 
@@ -378,7 +374,7 @@ override func viewDidLayoutSubviews() {
 앱델리게이트나, 씬델리게이트에 객체를 두지 않아도 된다는거지.      
 지금은 이렇게 간단하게 표현했지만, 저 WeatherSummary와 ForecastData가 서버에서 받아오는 데이터고 따라서 저 객체에 값을 넣을 수 있는 메소드가 존재해.               
 두개 메소드는 private으로 쓰이는 것, 커스텀 큐를 만들어 사용한 것에 유의하도록 해. 
-#Stack Program
+
 ````swift
 
 class WeaterDataSource {

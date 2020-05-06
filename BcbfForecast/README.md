@@ -295,6 +295,39 @@ extension ViewController: CLLocationManagerDelegate {
 
 <details markdown="1">
 <summary> Privacy 권한요청 및 실패시 대응 </summary>
+
+여기서는 음, 위치를 알기위한 권한요청을 사용했어. veiwwillappear에 사용했는데 실패하면 그냥 얼랏만 띄워주거나 해서 처리를 했어. 근데 상황에따라서 얼랏에다가 이벤트를 줘서 설정화면으로 바로 보내버리거야 해야하거든. 아니면 메시지를 띄워주던가 말이야. 그거 잘생각해서 바꿔보도록 하고. 그리고 case에 대해서 다시 공부해보자. notDetermined, denied, restricted 등등. 정확히 어떨때쓰는건지 분류해서 잘 사용해야해. 앱의 매우 중요한 기능이 동작하지 않을 수 있으니까. 
+
+````swift
+
+override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    locationLabel.text = "업데이트 중..."
+
+    if CLLocationManager.locationServicesEnabled() {
+        switch CLLocationManager.authorizationStatus() {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .authorizedAlways, .authorizedWhenInUse:
+            updateCurrentLocation()
+        case .denied, .restricted:
+            show(message: "위치 서비스 사용 불가")
+        default:
+            fatalError()
+        }
+
+
+    } else{
+        show(message: "위치 서비스 사용 불가")
+    }
+
+}
+
+
+````
+
+
 </details>
 
 <details markdown="1">

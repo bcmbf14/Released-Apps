@@ -204,6 +204,58 @@ struct WeatherSummary: Codable {
 
 <details markdown="1">
 <summary> String to Double Type, 소수점 자리수 지정 </summary>
+
+Formatter는 엄청나게 많이 활용이 되지? 중요해 매우.      
+나같은 경우엔 그냥 구글링해서 갖고온 뭐 
+
+````swift
+String(format: "%02f", 0.12344567)
+````
+
+를 사용하곤 했지. 저거랑 지금 배운거랑 차이점도 한 번 알아보자. 
+        
+일단 여기서는 포매터를 하나 만들었어. 이렇게 타입은 numberFormatter야.     
+
+````swift
+let tempFormatter: NumberFormatter = {
+    let f = NumberFormatter()
+    f.minimumFractionDigits = 0 //소수점이 0인 경우엔 출력하지 않고
+    f.maximumFractionDigits = 1 //나머지 경우에는 1자리만 출력한다.
+    return f
+}()
+
+````
+
+그리고 사용할 곳으로 가서 이렇게 사용했어. 이걸 어디 익스텐션이나 다른걸로 만들어놓는 방법도 생각해보자.     
+
+
+````swift
+
+let max = Double(data.temperature.tmax) ?? 0.0
+let min = Double(data.temperature.tmin) ?? 0.0
+
+let maxStr = tempFormatter.string(for: max) ?? "-"
+let minStr = tempFormatter.string(for: min) ?? "-"
+cell.minMaxLabel.text = "최대 \(maxStr)º 최소 \(minStr)º"
+
+let current = Double(data.temperature.tc) ?? 0.0
+let currentStr = tempFormatter.string(for: current) ?? "-"
+cell.currentTemperatureLabel.text = currentStr
+
+````
+
+참, string으로 컨버팅하는 메소드는 2가지가 있어. 차이는 큰 건 없지만, 입력 타입이 달라. 그래서 any를 많이 쓰는 것 같아. 
+
+````swift
+
+                
+tempFormatter.string(from: NSNumber)
+tempFormatter.string(for: Any?)
+
+````
+
+
+
 </details>
 
 <details markdown="1">
@@ -227,19 +279,19 @@ placemarks이 왜 s냐면 같은 장소라도 여러가지 명칭이 있을 수 
 
 ````swift
 
- let geocoder = CLGeocoder()
-            geocoder.reverseGeocodeLocation(loc) { [weak self] (placemarks, error) in
-                //                하나의 명칭에 대한 여러가지 명칭이 있을 수 있어서 배열로 전달해줌
-                if let place = placemarks?.first {
-                    
-                    //미국 기준이기 때문에 우리나라 구랑 동을 받아와야 함
-                    if let gu = place.locality, let dong = place.subLocality {
-                        self?.locationLabel.text = "\(gu) \(dong)"
-                    }else{
-                        self?.locationLabel.text = place.name
-                    }
-                }
-            }
+let geocoder = CLGeocoder()
+geocoder.reverseGeocodeLocation(loc) { [weak self] (placemarks, error) in
+    //                하나의 명칭에 대한 여러가지 명칭이 있을 수 있어서 배열로 전달해줌
+    if let place = placemarks?.first {
+
+        //미국 기준이기 때문에 우리나라 구랑 동을 받아와야 함
+        if let gu = place.locality, let dong = place.subLocality {
+            self?.locationLabel.text = "\(gu) \(dong)"
+        }else{
+            self?.locationLabel.text = place.name
+        }
+    }
+}
             
 ````
 

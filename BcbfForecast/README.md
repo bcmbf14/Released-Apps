@@ -208,6 +208,42 @@ struct WeatherSummary: Codable {
 
 <details markdown="1">
 <summary> Geocoding, Reverse Geocoding </summary>
+
+- Geocoding
+    - 특정 주소나 명칭을 사용해서 좌표를 얻는 것
+- Reverse Geocoding
+    - 좌표를 주소로 바꾸는 것
+           
+###### 
+
+일단 지금 내가 해야하는 건 locationManager로 가져온 locations으로 현재 위치를 표시해야 하잖아?   
+그래서 그걸 관할하는 인터페이스인 CLGeocoder를 생성했어.    
+그리고 .reverseGeocodeLocation를 이용해서 placemarks를 리턴 받았어.   
+placemarks이 왜 s냐면 같은 장소라도 여러가지 명칭이 있을 수 있기 때문이래.    
+그리고, placemarks는 미국기준이라서 그걸 다시 한번 바꿔줘야해.    
+우리나라의 '구'에 해당하는건 locality, '동'에 해당하는건 subLocality야.     
+그리고 그걸 사용하면 되는것이지.
+
+
+````swift
+
+ let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(loc) { [weak self] (placemarks, error) in
+                //                하나의 명칭에 대한 여러가지 명칭이 있을 수 있어서 배열로 전달해줌
+                if let place = placemarks?.first {
+                    
+                    //미국 기준이기 때문에 우리나라 구랑 동을 받아와야 함
+                    if let gu = place.locality, let dong = place.subLocality {
+                        self?.locationLabel.text = "\(gu) \(dong)"
+                    }else{
+                        self?.locationLabel.text = place.name
+                    }
+                }
+            }
+            
+````
+
+
 </details>
 
 

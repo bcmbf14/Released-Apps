@@ -196,10 +196,71 @@ struct WeatherSummary: Codable {
 
 <details markdown="1">
 <summary> viewDidLayoutSubviews </summary>
+
+viewDidLayoutSubviews같은 경우에는 이럴 때 썼어.   
+나는 첫번째 셀의 높이를 가져와야해. 근데 viewDidLoad에서 쓰자니 아직 셀이 완성?되지 않은거야.     
+그래서 이름 그대로 '레이아웃서브뷰를 그리는게 완료될때' 호출되는 viewDidLayoutSubviews를 오버라이드해서 거기에 내가 원하는 코드를 적었어.     
+아래처럼.       
+
+````swift
+
+override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+
+    if topInset == 0.0 {
+        let first = IndexPath(row: 0, section: 0)
+        if let cell = listTableView.cellForRow(at: first)  {
+            topInset = listTableView.frame.height - cell.frame.height
+
+            var inset = listTableView.contentInset
+            inset.top = topInset
+            listTableView.contentInset = inset
+        }
+    }
+}
+
+````
+
+
+
+
 </details>
 
 <details markdown="1">
 <summary> DataSource Singleton </summary>
+
+이것도 진짜 너무너무너무너무 중요하다.        
+실무에서 너무너무너무 자주 쓰이는 부분이야.         
+근데 아직 난 잘 몰라. 초보라서..ㅠㅠ      
+쨌건, 서버에서 받아오는 데이터를 싱글톤으로 갖고있다가 어디든 쓰는거야.        
+앱델리게이트나, 씬델리게이트에 객체를 두지 않아도 된다는거지.      
+지금은 이렇게 간단하게 표현했지만, 저 WeatherSummary와 ForecastData가 서버에서 받아오는 데이터고 따라서 저 객체에 값을 넣을 수 있는 메소드가 존재해.               
+두개 메소드는 private으로 쓰이는 것, 커스텀 큐를 만들어 사용한 것에 유의하도록 해. 
+
+````swift
+
+class WeaterDataSource {
+    static let shared = WeaterDataSource()
+    
+    private init() {}
+    
+    var summary: WeatherSummary?
+    var forecastList = [ForecastData]()
+    
+    let group = DispatchGroup()
+    let workQueue = DispatchQueue(label: "apiQueue", attributes: .concurrent)
+    
+    func fetch(location: CLLocation, completion: @escaping () -> ()){}
+    private func fetchSummary(lat: Double, lon:Double, completion: @escaping () -> ()){}
+    private func fetchForecast(lat: Double, lon:Double, completion: @escaping () -> ()){}
+
+}
+
+````
+
+
+
+
 </details>
 
 <details markdown="1">
@@ -302,62 +363,3 @@ geocoder.reverseGeocodeLocation(loc) { [weak self] (placemarks, error) in
 # 
 
 
-- Product Name
-  - 프로젝트네임에는 단순명사(메모,날씨,카메라)등만 적으면 안된다.
-  - 원하는 접두어, 접미어를 붙여서 최대한 고유하게 하는 것이 좋다. 
-  - 영어 대소문자를 사용한다. 특수문자, 한글, 숫자 등은 적지 않는 것이 좋다.
-  - 위의 사항을 어길시, 앱스토어에 앱을 등록 할 때 문제가 생길 수 있다.
- 
-- Oragnization Identifier 
-  - 보통 역도메인 문자열을 입력하는데, 도메인이 없다면 이름을 공백없이 입력해도 좋다.
-  
-- Bundle Identifier
-  - 앱을 유일하게 구별하는 __식별자__ 로 사용한다.
-
-# 
-___App Icon___
-
-![image](https://user-images.githubusercontent.com/60660894/79072564-a0e2dd00-7d1c-11ea-8c20-02e0df4c6606.png)
-
-- 점선이 표시된 개별 사각형을 Image Well이라고 부른다.
-- 밑에 20pt라고 되어있는 것은 이미지의 크기를 뜻하는 것이고 단위는 point이다. pixel과는 다른 단위이다.
-- 2x, 3x라고 써있는 것은 상대적인 해상도를 뜻한다. 레티나 디스플레이가 적용되지 않은 버전은 1x, 레티나 2x, 레티나 HD/슈퍼 레티나 이상은 3x 라고 부른다. 
-- 아이콘으로 작성할 이미지는 앱 아이콘이 정사각형에 코너가 약간 둥근 모양이기 때문에, 원형보다는 정사각형이 낫다. 
-- 아이콘을 생성하고, 엄청나게 많은 이미지를 일일히 넣어줘야 한다. 번거롭긴 하다. 
-
-[앱 아이콘 다운로드](https://www.flaticon.com/free-icon/compose_148876#term=pencil&page=1&position=18)
-
-[아이폰 해상도 가이드](https://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions)
-
-[무료 앱 아이콘 생성 사이트](https://appiconmaker.co/)
-
-
-# 
-
-___Memo Class___
-
-```swift
-
-import Foundation
-
-class Memo {
-    var content: String
-    var insertData : Date
-    
-    init(content: String){
-        self.content = content
-        insertData = Date()
-    }
-    
-    
-    static var dummyMemoList = [
-        Memo(content: "Lorem Ipsum"),
-        Memo(content: "🥰 + 👍 = ❤️")
-    
-    ]
-}
-
-```
-
-- 메모클래스를 생성했고, 더미데이터를 세팅했다. 
-- 클래스기 때문에 생성자를 만들어주었고, 날짜형식같은경우는 기본 Date형식을 생성해서 넣어주면 되기 때문에 따로 생성자에 넣지 않았다. 

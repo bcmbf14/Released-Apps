@@ -184,10 +184,113 @@ struct WeatherSummary: Codable {
 
 <details markdown="1">
 <summary> NumberFormatter, DateFormatter </summary>
+
+여기선 포매터가 2종류가 쓰였어. 중요하니까 공부 잘해.         
+특이한 것은 DateFormatter인데 사용할 때, dateFormat에 "M.d (E)", "HH:00" 값을 넣어서 포맷을 바꿔주고 있어. "M.d (E)"가 뭔지 모르겠다야? 공부해.      
+````swift
+
+let tempFormatter: NumberFormatter = {
+    let f = NumberFormatter()
+    f.minimumFractionDigits = 0 //소수점이 0인 경우엔 출력하지 않고
+    f.maximumFractionDigits = 1 //나머지 경우에는 1자리만 출력한다.
+    return f
+}()
+
+let dateFormatter: DateFormatter = {
+    let f = DateFormatter()
+    f.locale =  Locale(identifier: "Ko_kr")
+    return f
+}()
+
+
+
+let target = WeaterDataSource.shared.forecastList[indexPath.row]
+
+dateFormatter.dateFormat = "M.d (E)"
+cell.dateLabel.text = dateFormatter.string(for: target.date)
+
+dateFormatter.dateFormat = "HH:00"
+cell.timeLabel.text = dateFormatter.string(for: target.date)
+    
+````
+
 </details>
 
 <details markdown="1">
 <summary> CoreLocation, CLLocationManagerDelegate </summary>
+
+사용자 위치 가져오는 것은 CoreLocation 프레임워크 인가봐. 자세한 건 다음에 공부해야할 것 같다.        
+간단하게만 CLLocationManagerDelegate에 대해서 볼건데, 대략 소개해볼게.             
+자세한 내용은 [공식문서](https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate)에 있고, 여기서는 내가 사용한 코드만 적어놓을 게. 그게 이해하기 오히려 더 편할거야.       
+
+````swift
+
+extension ViewController: CLLocationManagerDelegate {
+    
+    func updateCurrentLocation(){
+        locationManager.startUpdatingLocation() //사용자의 위치가 업데이트 될때마다 델리게이트를 통해 알려줌
+    }
+    
+    
+    //위치정보가 업데이트 될떄마다 반복적으로 알려줌
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if let loc = locations.first {
+            print(loc.coordinate)
+            
+            //        Geocoding
+            //        특정 주소나 명칭을 사용해서 좌표를 얻는 것
+            //        Reverse Geocoding
+            //        좌표를 주소로 바꾸는 것
+            
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(loc) { [weak self] (placemarks, error) in
+                //                하나의 명칭에 대한 여러가지 명칭이 있을 수 있어서 배열로 전달해줌
+                if let place = placemarks?.first {
+                    
+                    //미국 기준이기 때문에 우리나라 구랑 동을 받아와야 함
+                    if let gu = place.locality, let dong = place.subLocality {
+                        self?.locationLabel.text = "\(gu) \(dong)"
+                    }else{
+                        self?.locationLabel.text = place.name
+                    }
+                }
+            }
+            
+            
+            //        샘플에서는 뷰디드로드에서 호출했는데, 뷰디드로드에서 현재 로케이션 정보를 받아올 수 없으니
+            //        이델리게이트에서 호출한다.
+            WeaterDataSource.shared.fetch(location: loc) { [weak self] in
+                self?.listTableView.reloadData()
+            }
+            
+        }
+        
+        //계속 알려주면 배터리가 소모되니까 한번만 받고 그만받기. 배터리절약. 위치기반 배터리 아주중요.
+        manager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        show(message: error.localizedDescription)
+        manager.stopUpdatingLocation()
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            updateCurrentLocation()
+        default:
+            print("")
+            //            fatalError()
+        }
+    }
+    
+}
+
+
+````
+
 </details>
 
 <details markdown="1">

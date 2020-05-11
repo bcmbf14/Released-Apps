@@ -100,7 +100,7 @@ struct WeatherSummary: Codable {
 ```
 {
     "weather": {
-        "minutely": [
+        "minutely":[
         {
         "station": {
         "longitude": "127.01562",
